@@ -1,0 +1,23 @@
+module DEMSApp
+{
+  interface Client
+  {
+    void bookEvent (in string customerID,in string eventID,in string eventType);
+	void getBookingSchedule (in string customerID) ;
+	void cancelEvent (in string customerID,in string eventID,in string eventType); 
+	void swapEvent (in string  customerID,in string newEventID,in string newEventType,in string oldEventID, in string oldEventType);
+    oneway void shutdown();
+    };
+  interface Manager
+  {
+    void addEvent (in string eventID,in string eventType,in long bookingCapacity);
+	void removeEvent (in string eventID,in string eventType);
+	void listEventAvailability (in string eventType);
+    void bookEvent (in string customerID,in string eventID,in string eventType);
+	void getBookingSchedule (in string customerID) ;
+	void cancelEvent (in string customerID,in string eventID,in string eventType) ;
+    void swapEvent (in string  customerID,in string newEventID,in string newEventType,in string oldEventID, in string oldEventType);
+    oneway void shutdown();
+    };    
+    
+};
