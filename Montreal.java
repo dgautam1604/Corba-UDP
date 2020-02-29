@@ -88,48 +88,170 @@ public class Montreal {
 
 	}
 
-	public String getHashMap(String eventType) {
+	public synchronized String getHashMap(String eventType) {
 		//it sends a b or c depending on input
 		String value = eventList.get(eventType);
 
 		return value;
 	}
 
-	public void addHashMap(String var, String key, int Value) {
+	public synchronized String addHashMap(String var, String key, int Value) {
 		if (var == "a") {
 			// var=eventType sub_hashmap , key=eventID Value=booking Capacity
 			if (a.get(key) != null) {
 
 				int val = a.get(key);
 				a.replace(key, val + Value);
-				System.out.println("Value updated for " + key + "to " + val);
+				return("Value updated for " + key + "to " + val);
 			} else {
 				a.put(key, Value);
-				System.out.println("Added Successfully ");
-				a.put(key, Value);
+				return("Added Successfully "+ key + "to " + a.get(key));
+				
 			}
 		} else if (var == "b") {
 			if (b.get(key) != null) {
 
 				int val = b.get(key);
 				b.replace(key, val + Value);
-				System.out.println("Value updated for " + key + "to " + val);
+				return("Value updated for " + key + "to " + val);
 			} else {
 				b.put(key, Value);
-				System.out.println("Added Successfully");
+				return("Added Successfully "+ key + "to " + b.get(key));
 			}
 		} else if (var == "c") {
 			if (c.get(key) != null) {
 
 				int val = c.get(key);
 				c.replace(key, val + Value);
-				System.out.print("Value updated for " + key + "to " + val);
+				return("Value updated for " + key + "to " + val);
 			} else {
 				c.put(key, Value);
-				System.out.print("Added Successfully");
+				return("Added Successfully "+ key + "to " + a.get(key));
 			}
-		}
+		} else
+		return ("Not Successfull ");
 		
 	}
+
+	public synchronized String removeHashMap(String var, String key) {
+		if (var == "a") {
+			if (a.get(key) != null) {
+				a.remove(key);
+				return("Removed " + key);
+			} else {
+
+				return("No record");
+			}
+		} else if (var == "b") {
+			if (b.get(key) != null) {
+				b.remove(key);
+				return("Removed " + key);
+			} else {
+
+				return("No record");
+			}
+		} else if (var == "c") {
+			if (c.get(key) != null) {
+				c.remove(key);
+				return("Removed " + key);
+			} else {
+
+				return("No record");
+			}
+		}
+		return null;
+		
+	}
+
+	public synchronized HashMap<String, Integer> display(String evenType) {
+		HashMap<String, Integer> temp = new HashMap<String, Integer>();
+		String value = eventList.get(evenType);
+		System.out.println("List for event type " + evenType);
+		String ss=" ";
+		if (value.equalsIgnoreCase("a")) {
+			a.entrySet().forEach(entry -> {
+				System.out.println(entry.getKey());
+				System.out.println(entry.getValue());
+				//ss=ss+entry.getKey();
+				temp.put(entry.getKey(), entry.getValue());
+			});
+			return temp;
+		} else if (value.equalsIgnoreCase("b")) {
+			b.entrySet().forEach(entry -> {
+				temp.put(entry.getKey(), entry.getValue());
+			});
+			return temp;
+		} else if (value.equalsIgnoreCase("c")) {
+			c.entrySet().forEach(entry -> {
+				temp.put(entry.getKey(), entry.getValue());
+			});
+			return temp;
+		}
+		return null;
+		
+	}
+
+	public synchronized String checkAvailabilityOfEvent(String var, String key) {
+		// key is event id
+		
+		if (var == "a") {
+			if (a.containsKey(key) && a.get(key) != 0 ) {
+				return("Available ");
+			} else {
+
+				return("Not");
+			}
+		} else if (var == "b") {
+			if (b.containsKey(key) && b.get(key) != 0 ) {
+				return("Available ");
+			} else {
+
+				return("Not");
+			}
+		} else if (var == "c") {
+			if (c.containsKey(key) && c.get(key) != 0 ) {
+				return("Available ");
+			} else {
+
+				return("Not");
+			}
+		}
+		return null;
+	}
+
+	public synchronized String bookedEvent(String eventID, String customerID) {
+		// TODO Auto-generated method stub
+		Muser.put(eventID, customerID);
+		String s="booked event "+eventID+" for "+customerID;
+		return s;
+	}
+	public synchronized String canceledEvent(String eventID, String customerID) {
+		// TODO Auto-generated method stub
+		
+		Muser.remove(eventID);
+		String s="cancelled event "+eventID+" for "+customerID;
+		return s;
+	}
+	public synchronized boolean checkUserBooking(String eventID, String customerID) {
+		// TODO Auto-generated method stub
+		Muser.put(eventID, customerID);
+		if (Muser.containsKey(eventID) && Muser.get(eventID).equalsIgnoreCase(customerID) ){
+			return true;
+		}
+		else
+			return false;
+	}
+	public synchronized HashMap<String, String> getUserData(String customerID) {
+		HashMap<String, String> temp11 = new HashMap<String, String>();
+			
+			Muser.entrySet().forEach(entry -> {
+			if(customerID.equalsIgnoreCase(entry.getValue()))
+				temp11.put(entry.getKey(), entry.getValue());
+			});
+			return temp11;
+		
+		
+	}
+	
 
 }
