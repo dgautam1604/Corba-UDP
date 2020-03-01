@@ -23,7 +23,7 @@ public class Clients {
 			objRef = orb.resolve_initial_references("NameService");
 			NamingContextExt ncRef = NamingContextExtHelper.narrow(objRef);
 			
-			Manager dem=(Manager) ManagerHelper.narrow(ncRef.resolve_str("mtl"));
+			
 			System.out.println("Client Started");
 			
 			System.out.print("Enter your id ");
@@ -32,6 +32,11 @@ public class Clients {
 			//ID to upper case
 			String id = sc.nextLine().toUpperCase();
 			char[] ch = id.toCharArray();
+			char[] ch2 = { ch[0], ch[1], ch[2] };
+			String bookingServ = new String(ch2);
+			
+			Manager dem=(Manager) ManagerHelper.narrow(ncRef.resolve_str(bookingServ));
+			
 			while(true) {
 			System.out.println("What would you like to do today?(Select 1,2,3)");
 			if(ch[3] == 'M'){

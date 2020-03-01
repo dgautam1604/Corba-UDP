@@ -21,7 +21,7 @@ import org.omg.PortableServer.POAPackage.WrongPolicy;
 import DEMSApp.Manager;
 import DEMSApp.ManagerHelper;
 
-public class Montreal {
+public class Sherbrook {
 
 	public static HashMap<String, String> eventList = new HashMap<String, String>();
 	public static HashMap<String, Integer> a = new HashMap<String, Integer>();
@@ -52,14 +52,14 @@ public class Montreal {
 			NamingContextExt ncRef = NamingContextExtHelper.narrow(objRef);
 
 			// bind the Object Reference in Naming
-			NameComponent path[] = ncRef.to_name("MTL");
+			NameComponent path[] = ncRef.to_name("SHE");
 			ncRef.rebind(path, href);
 
 			eventList.put("Conference", "a");
 			eventList.put("TradeShow", "b");
 			eventList.put("Seminar", "c");
 
-			System.out.println("Montreal Server ready and waiting ...");
+			System.out.println("Sherbrooke Server ready and waiting ...");
 
 			// wait for invocations from clients
 			for (;;) {
@@ -397,20 +397,23 @@ public class Montreal {
 		return temp11;
 
 	}
-	public void UDPConnect(int serverPort, String combinedId) {
+	public synchronized void UDPConnect(int serverPort, String combinedId) {
 		DatagramSocket aSocket = null;
 		try {
-			System.out.println("Montreal client started");
+			System.out.println("Sherbrooke client started");
 			aSocket = new DatagramSocket();
 			byte[] message = combinedId.getBytes();
 
 			InetAddress aHost = InetAddress.getByName("localhost");
 
+			// int serverPort = this.;
+			// DatagramPacket request =new DatagramPacket(m, args[0].length(),
+			// aHost, serverPort);
 			DatagramPacket request = new DatagramPacket(message,
 					combinedId.length(), aHost, serverPort);
 
 			aSocket.send(request);
-			System.out.println("Request message sent via UDP ");
+			System.out.println("Request message sent via UDP");
 
 			byte[] buffer = new byte[1000];
 			DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
@@ -426,6 +429,5 @@ public class Montreal {
 				aSocket.close();
 		}
 	}
-
 
 }
