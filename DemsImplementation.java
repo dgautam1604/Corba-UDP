@@ -1,3 +1,5 @@
+
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -139,7 +141,7 @@ public class DemsImplementation extends ManagerPOA {
 				String count=mn.UDPConnect(6001, ("checkCount"+customerID));
 				String count1=mn.UDPConnect(6002, ("checkCount"+customerID));
 				int counter=Integer.parseInt(count.substring(0, 1))+Integer.parseInt(count1.substring(0, 1));
-				if(counter>3){
+				if(counter==3){
 					return "Cannot book.You already have 3 booking in the servers";
 				}
 				/*if (mn.checkAvailabilityOfEvent(var.substring(0, 1), eventID).equalsIgnoreCase(
@@ -156,7 +158,7 @@ public class DemsImplementation extends ManagerPOA {
 				String count=mn.UDPConnect(6001, ("checkCount"+customerID));
 				String count1=mn.UDPConnect(6002, ("checkCount"+customerID));
 				int counter=Integer.parseInt(count.substring(0, 1))+Integer.parseInt(count1.substring(0, 1));
-				if(counter>3){
+				if(counter==3){
 					return "Cannot book.You already have 3 booking in the servers";
 				}
 				
@@ -190,7 +192,7 @@ public class DemsImplementation extends ManagerPOA {
 				String count=(mn.UDPConnect(6000, ("checkCount"+customerID)));
 				String count1=(mn.UDPConnect(6002, ("checkCount"+customerID)));
 				int counter=Integer.parseInt(count.substring(0, 1))+Integer.parseInt(count1.substring(0, 1));
-				if(counter>3){
+				if(counter==3){
 					return "Cannot book.You already have 3 booking in the servers";
 				}
 				
@@ -207,7 +209,7 @@ public class DemsImplementation extends ManagerPOA {
 				String count=mn.UDPConnect(6000, ("checkCount"+customerID));
 				String count1=mn.UDPConnect(6002, ("checkCount"+customerID));
 				int counter=Integer.parseInt(count.substring(0, 1))+Integer.parseInt(count1.substring(0, 1));
-				if(counter>3){
+				if(counter==3){
 					return "Cannot book.You already have 3 booking in the servers";
 				}
 				/*if (mn.checkAvailabilityOfEvent(var.substring(0, 1), eventID).equalsIgnoreCase(
@@ -239,7 +241,7 @@ public class DemsImplementation extends ManagerPOA {
 				String count=mn.UDPConnect(6000, ("checkCount"+customerID));
 				String count1=mn.UDPConnect(6001, ("checkCount"+customerID));
 				int counter=Integer.parseInt(count.substring(0, 1))+Integer.parseInt(count1.substring(0, 1));
-				if(counter>3){
+				if(counter==3){
 					return "Cannot book.You already have 3 booking in the servers";
 				}
 				/*
@@ -256,7 +258,7 @@ public class DemsImplementation extends ManagerPOA {
 				String count=mn.UDPConnect(6000, ("checkCount"+customerID));
 				String count1=mn.UDPConnect(6001, ("checkCount"+customerID));
 				int counter=Integer.parseInt(count.substring(0, 1))+Integer.parseInt(count1.substring(0, 1));
-				if(counter>3){
+				if(counter==3){
 					return "Cannot book.You already have 3 booking in the servers";
 				}
 				/*if (mn.checkAvailabilityOfEvent(var.substring(0, 1), eventID).equalsIgnoreCase(
@@ -436,13 +438,10 @@ public class DemsImplementation extends ManagerPOA {
 		StringBuffer str=new StringBuffer();
 		
 		
-		/*Runnable runnableTask = () -> {
-	*/
+		
 		String str2=d1.bookEvent(customerID, newEventID, newEventType, serv);
 		str.append(str2);
-		/* 
-     }; 
-     Runnable runnableTask2 = () -> {*/
+	
     		
 		if((str2.substring(0, 12)).equalsIgnoreCase("booked event")){
 			String str1=d1.cancelEvent(customerID, oldEventID, oldEventType, serv);

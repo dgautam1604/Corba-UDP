@@ -24,6 +24,7 @@ import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 
+
 import DEMSApp.Manager;
 import DEMSApp.ManagerHelper;
 
@@ -368,6 +369,7 @@ public class Quebec {
 					String dat = str+str2;
 					
 					int i = Integer.parseInt(String.valueOf(dat));
+					int counter=0;
 					for (; i < 30; i++) {
 						char[] c1 = key1.toCharArray();
 										if(c1[3]=='M'){
@@ -378,7 +380,7 @@ public class Quebec {
 												int Value=a.get(key1);
 												a.replace(key1, Value-1);
 												remover.append(". "+"Booking got changed to "+key1);
-												break;
+												counter++;break;
 												}
 											} c1 = key1.toCharArray();
 										if(c1[3]=='A'){
@@ -389,7 +391,7 @@ public class Quebec {
 												int Value=a.get(key1);
 												a.replace(key1, Value-1);
 												remover.append(". "+"Booking got changed to "+key1);
-												break;
+												counter++;break;
 											}c1 = key1.toCharArray();
 										}
 										if (i+1 < 10)
@@ -405,8 +407,11 @@ public class Quebec {
 														int Value=a.get(key1);
 														a.replace(key1, Value-1);
 														remover.append(". "+"Booking got changed to "+key1);
-														break;
+														counter++;	break;
 													} }c1 = key1.toCharArray();
+					}if(counter==0){
+						Muser1.remove(key);
+						remover.append(". "+"All Booking got cancelled for "+key);
 					}
 					
 				}
@@ -428,6 +433,7 @@ public class Quebec {
 					String dat = str+str2;
 					
 					int i = Integer.parseInt(String.valueOf(dat));
+					int counter=0;
 					for (; i < 30; i++) {
 						char[] c1 = key1.toCharArray();
 										if(c1[3]=='M'){
@@ -438,7 +444,7 @@ public class Quebec {
 												int Value=b.get(key1);
 												b.replace(key1, Value-1);
 												remover.append(". "+"Booking got changed to "+key1);
-												break;
+												counter++;break;
 												}
 											} c1 = key1.toCharArray();
 										if(c1[3]=='A'){
@@ -449,7 +455,7 @@ public class Quebec {
 												int Value=b.get(key1);
 												b.replace(key1, Value-1);
 												remover.append(". "+"Booking got changed to "+key1);
-												break;
+												counter++;break;
 											}c1 = key1.toCharArray();
 										}
 										if (i+1 < 10)
@@ -465,10 +471,13 @@ public class Quebec {
 														int Value=b.get(key1);
 														b.replace(key1, Value-1);
 														remover.append(". "+"Booking got changed to "+key1);
-														break;
+														counter++;break;
 													} }c1 = key1.toCharArray();
 					}
-					
+					if(counter==0){
+						Muser1.remove(key);
+						remover.append(". "+"All Booking got cancelled for "+key);
+					}	
 				}
 				b.remove(key);
 				return(key + " ." +remover.toString());
@@ -488,6 +497,7 @@ public class Quebec {
 					String dat = str+str2;
 					
 					int i = Integer.parseInt(String.valueOf(dat));
+					int counter=0;
 					for (; i < 30; i++) {
 						char[] c1 = key1.toCharArray();
 										if(c1[3]=='M'){
@@ -498,7 +508,7 @@ public class Quebec {
 												int Value=c.get(key1);
 												c.replace(key1, Value-1);
 												remover.append(". "+"Booking got changed to "+key1);
-												break;
+												counter++;break;
 												}
 											} c1 = key1.toCharArray();
 										if(c1[3]=='A'){
@@ -509,7 +519,7 @@ public class Quebec {
 												int Value=c.get(key1);
 												c.replace(key1, Value-1);
 												remover.append(". "+"Booking got changed to "+key1);
-												break;
+												counter++;break;
 											}c1 = key1.toCharArray();
 										}
 										if (i+1 < 10)
@@ -525,10 +535,13 @@ public class Quebec {
 														int Value=c.get(key1);
 														c.replace(key1, Value-1);
 														remover.append(". "+"Booking got changed to "+key1);
-														break;
+														counter++;break;
 													} }c1 = key1.toCharArray();
 					}
-					
+					if(counter==0){
+						Muser1.remove(key);
+						remover.append(". "+"All Booking got cancelled for "+key);
+					}
 				}
 				c.remove(key);
 				return(key + " ." +remover.toString());
